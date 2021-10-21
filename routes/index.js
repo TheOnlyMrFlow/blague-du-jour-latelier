@@ -9,7 +9,12 @@ const blagues = new BlaguesAPI(process.env.BLAGUE_API_KEY);
 router.post('/', async (req, res, next) => {
   var blagueJson = await blagues.random();
   var blaguePretty = blagueJson.joke + "\r\n" + blagueJson.answer;
-  res.send(blaguePretty);
+
+  res.json(  
+    {
+      response_type: "in_channel",
+      text: blaguePretty
+    })
 });
 
 module.exports = router;
